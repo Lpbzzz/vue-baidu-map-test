@@ -1,58 +1,49 @@
 <template>
-    <baidu-map class="map" :center="{lng: 116.404, lat: 39.915}" :zoom="15" :mapStyle="{styleJson: styleJson}">
-      <bm-point-collection :points="points" color="red"></bm-point-collection>
+    <baidu-map class="map" :center="{lng: 116.404, lat: 39.915}" :zoom="15" :scroll-wheel-zoom="true">
+
+        <bm-point-collection :points="points" :color="points.status=='completed'?'red':'blue'"></bm-point-collection>
+
+
+
     </baidu-map>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        styleJson: [{
-            "featureType": "all",
-            "elementType": "geometry",
-            "stylers": {
-              "hue": "#007fff",
-              "saturation": 89
+    export default {
+        data() {
+            return {
+                points: [{
+                    lng: 116.381,
+                    lat: 39.901,
+                    status: 'a'
+                }, {
+                    lng: 116.382,
+
+                    lat: 39.902,
+
+                    status: 'completed'
+                }, {
+                    lng: 116.383,
+
+                    lat: 39.903,
+
+                    status: 'completed'
+                }]
+
             }
-          },
-          {
-            "featureType": "water",
-            "elementType": "all",
-            "stylers": {
-              "color": "#ffffff"
-            }
-          }
-        ],
-        points: [{
-          lng:116.407,
-          lat:39.915
-        }],
-        pLng:116.405,
-        pLat:39.914,
-      }
-    },
-    methods: {
-      addP(){
-        this.pLat+=0.01;
-        this.pLng+=0.01;
-        let obj = {};
-        obj.lng = this.pLng;
-        obj.lat = this.pLat
-        this.points.push(obj)
-      }
-    },
-    mounted() {
-      setInterval(e=>{
-        this.addP()
-      },1000)
+        },
+        methods: {
+
+        },
+        mounted() {
+
+        }
     }
-  }
 
 </script>
 <style>
-  .map {
-    width: 900px;
-    height: 900px
-  }
+    .map {
+        width: 900px;
+        height: 900px
+    }
 
 </style>
